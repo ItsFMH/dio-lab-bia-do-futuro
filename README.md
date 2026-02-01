@@ -1,149 +1,47 @@
-# 🤖 Agente Financeiro Inteligente com IA Generativa
+# 💰 EconoAI - Mentor Financeiro Inteligente com Gen AI
+O EconoAI é um agente de Inteligência Artificial Generativa projetado para transformar dados bancários estáticos em uma consultoria financeira proativa e humanizada. Utilizando a arquitetura RAG (Retrieval-Augmented Generation), o agente consome dados locais para oferecer insights personalizados ao usuário ItsFMH.
 
-## Contexto
+## 🎯 Caso de Uso
+Diferente dos chatbots tradicionais, o EconoAI foca na contextualização do cliente:
 
-Os assistentes virtuais no setor financeiro estão evoluindo de simples chatbots reativos para **agentes inteligentes e proativos**. Neste desafio, você vai idealizar e prototipar um agente financeiro que utiliza IA Generativa para:
+Memória de Relacionamento: Identifica problemas técnicos passados, como o erro no extrato relatado em 22/09/2025, para validar a satisfação atual do usuário.
 
-- **Antecipar necessidades** ao invés de apenas responder perguntas
-- **Personalizar** sugestões com base no contexto de cada cliente
-- **Cocriar soluções** financeiras de forma consultiva
-- **Garantir segurança** e confiabilidade nas respostas (anti-alucinação)
+Personalização via Perfil de Risco: Cruza o perfil Moderado do cliente com metas reais (ex: R$ 50.000 para entrada de imóvel em 2027) antes de sugerir produtos.
 
-> [!TIP]
-> Na pasta [`examples/`](./examples/) você encontra referências de implementação para cada etapa deste desafio.
+Precisão nos Dados: Calcula dinamicamente o saldo disponível (R$ 2.511,10) a partir do processamento de entradas e saídas do arquivo de transações.
 
----
+## 🛠️ Tecnologias Utilizadas
+Python: Lógica de back-end e processamento de dados.
 
-## O Que Você Deve Entregar
+Streamlit: Interface de usuário e dashboard interativo.
 
-### 1. Documentação do Agente
+Pandas: Manipulação de DataFrames para cálculos financeiros.
 
-Defina **o que** seu agente faz e **como** ele funciona:
+Gen AI / RAG: Engenharia de prompts para grounding e controle de alucinações.
 
-- **Caso de Uso:** Qual problema financeiro ele resolve? (ex: consultoria de investimentos, planejamento de metas, alertas de gastos)
-- **Persona e Tom de Voz:** Como o agente se comporta e se comunica?
-- **Arquitetura:** Fluxo de dados e integração com a base de conhecimento
-- **Segurança:** Como evitar alucinações e garantir respostas confiáveis?
+## 🧠 Arquitetura de Prompts e Segurança
+O agente foi configurado com Guardrails (trilhos de segurança) rigorosos:
 
-📄 **Template:** [`docs/01-documentacao-agente.md`](./docs/01-documentacao-agente.md)
+Grounding Estrito: A IA responde apenas com base nos arquivos fornecidos. Se a informação não existe na base, ela admite o desconhecimento de forma profissional.
 
----
+Admissão de Erro: O sistema possui um fluxo de feedback onde, se contestado pelo usuário, admite a possibilidade de falha e convida à revisão dos cálculos brutos.
 
-### 2. Base de Conhecimento
+Bloqueio de Risco: Filtros automáticos impedem a sugestão de ativos de risco 'Alto' para perfis que não comportam essa volatilidade.
 
-Utilize os **dados mockados** disponíveis na pasta [`data/`](./data/) para alimentar seu agente:
+## 🚀 Testes
 
-| Arquivo | Formato | Descrição |
-|---------|---------|-----------|
-| `transacoes.csv` | CSV | Histórico de transações do cliente |
-| `historico_atendimento.csv` | CSV | Histórico de atendimentos anteriores |
-| `perfil_investidor.json` | JSON | Perfil e preferências do cliente |
-| `produtos_financeiros.json` | JSON | Produtos e serviços disponíveis |
+### Teste 1
+<img width="1365" height="616" alt="image" src="https://github.com/user-attachments/assets/57b47081-df29-48cf-b989-5a12e02f2ad8" />
 
-Você pode adaptar ou expandir esses dados conforme seu caso de uso.
+### Teste 2
+<img width="1365" height="628" alt="image" src="https://github.com/user-attachments/assets/6dd144a9-5149-4695-b090-a47eb2a08f0e" />
 
-📄 **Template:** [`docs/02-base-conhecimento.md`](./docs/02-base-conhecimento.md)
+### Teste 3
+<img width="1365" height="620" alt="image" src="https://github.com/user-attachments/assets/5857fb4a-fe0d-457e-9601-97a27d05052b" />
 
----
+### Teste 4
+<img width="1365" height="618" alt="image" src="https://github.com/user-attachments/assets/2fed12e5-0cd0-4b02-8479-59f8bdf38b2e" />
 
-### 3. Prompts do Agente
+### Teste 5
+<img width="1365" height="624" alt="image" src="https://github.com/user-attachments/assets/20372f2d-2c58-41a1-a8c7-db2d9d2e30c8" />
 
-Documente os prompts que definem o comportamento do seu agente:
-
-- **System Prompt:** Instruções gerais de comportamento e restrições
-- **Exemplos de Interação:** Cenários de uso com entrada e saída esperada
-- **Tratamento de Edge Cases:** Como o agente lida com situações limite
-
-📄 **Template:** [`docs/03-prompts.md`](./docs/03-prompts.md)
-
----
-
-### 4. Aplicação Funcional
-
-Desenvolva um **protótipo funcional** do seu agente:
-
-- Chatbot interativo (sugestão: Streamlit, Gradio ou similar)
-- Integração com LLM (via API ou modelo local)
-- Conexão com a base de conhecimento
-
-📁 **Pasta:** [`src/`](./src/)
-
----
-
-### 5. Avaliação e Métricas
-
-Descreva como você avalia a qualidade do seu agente:
-
-**Métricas Sugeridas:**
-- Precisão/assertividade das respostas
-- Taxa de respostas seguras (sem alucinações)
-- Coerência com o perfil do cliente
-
-📄 **Template:** [`docs/04-metricas.md`](./docs/04-metricas.md)
-
----
-
-### 6. Pitch
-
-Grave um **pitch de 3 minutos** (estilo elevador) apresentando:
-
-- Qual problema seu agente resolve?
-- Como ele funciona na prática?
-- Por que essa solução é inovadora?
-
-📄 **Template:** [`docs/05-pitch.md`](./docs/05-pitch.md)
-
----
-
-## Ferramentas Sugeridas
-
-Todas as ferramentas abaixo possuem versões gratuitas:
-
-| Categoria | Ferramentas |
-|-----------|-------------|
-| **LLMs** | [ChatGPT](https://chat.openai.com/), [Copilot](https://copilot.microsoft.com/), [Gemini](https://gemini.google.com/), [Claude](https://claude.ai/), [Ollama](https://ollama.ai/) |
-| **Desenvolvimento** | [Streamlit](https://streamlit.io/), [Gradio](https://www.gradio.app/), [Google Colab](https://colab.research.google.com/) |
-| **Orquestração** | [LangChain](https://www.langchain.com/), [LangFlow](https://www.langflow.org/), [CrewAI](https://www.crewai.com/) |
-| **Diagramas** | [Mermaid](https://mermaid.js.org/), [Draw.io](https://app.diagrams.net/), [Excalidraw](https://excalidraw.com/) |
-
----
-
-## Estrutura do Repositório
-
-```
-📁 lab-agente-financeiro/
-│
-├── 📄 README.md
-│
-├── 📁 data/                          # Dados mockados para o agente
-│   ├── historico_atendimento.csv     # Histórico de atendimentos (CSV)
-│   ├── perfil_investidor.json        # Perfil do cliente (JSON)
-│   ├── produtos_financeiros.json     # Produtos disponíveis (JSON)
-│   └── transacoes.csv                # Histórico de transações (CSV)
-│
-├── 📁 docs/                          # Documentação do projeto
-│   ├── 01-documentacao-agente.md     # Caso de uso e arquitetura
-│   ├── 02-base-conhecimento.md       # Estratégia de dados
-│   ├── 03-prompts.md                 # Engenharia de prompts
-│   ├── 04-metricas.md                # Avaliação e métricas
-│   └── 05-pitch.md                   # Roteiro do pitch
-│
-├── 📁 src/                           # Código da aplicação
-│   └── app.py                        # (exemplo de estrutura)
-│
-├── 📁 assets/                        # Imagens e diagramas
-│   └── ...
-│
-└── 📁 examples/                      # Referências e exemplos
-    └── README.md
-```
-
----
-
-## Dicas Finais
-
-1. **Comece pelo prompt:** Um bom system prompt é a base de um agente eficaz
-2. **Use os dados mockados:** Eles garantem consistência e evitam problemas com dados sensíveis
-3. **Foque na segurança:** No setor financeiro, evitar alucinações é crítico
-4. **Teste cenários reais:** Simule perguntas que um cliente faria de verdade
-5. **Seja direto no pitch:** 3 minutos passam rápido, vá ao ponto
